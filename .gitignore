@@ -35,3 +35,7 @@ flux-*.tar
 npm-debug.log
 /assets/node_modules/
 
+.elixir_ls/*
+logs/*
+.env
+.iex.exs

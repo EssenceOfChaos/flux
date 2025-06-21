@@ -6,6 +6,9 @@ import Config
 # and secrets from environment variables or elsewhere. Do not define
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
+require Logger
+DotenvParser.load_file(".env")
+Logger.debug("Parsing Dotenv file, secret value is #{System.get_env("SECRET_VALUE")}")
 
 # ## Using releases
 #
