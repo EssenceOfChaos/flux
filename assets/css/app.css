@@ -3,3 +3,6 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+.max-w-2xl {
+    max-width: 65rem !important
+}

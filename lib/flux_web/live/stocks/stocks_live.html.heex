@@ -1,0 +1,60 @@
+<section>
+  <form phx-change="suggest" phx-submit="search">
+    <input
+      type="text"
+      name="q"
+      value={@query}
+      placeholder="Live stock search"
+      list="results"
+      autocomplete="off"
+    />
+    <datalist id="results">
+      <%= for stock <- @results do %>
+        <option value={stock}><%= stock %></option>
+      <% end %>
+    </datalist>
+    <.button phx-disable-with="Searching...">Search</.button>
+  </form>
+</section>
+
+<br />
+
+<div class="ui grid">
+
+  <div class="sixteen wide column">
+  <div class="ui cards">
+      <%= for stock <- @mock_stocks do %>
+  <div class="card">
+    <div class="content">
+      <img class="right floated mini ui image"src={"/images/#{stock.image}"}>
+
+
+      <div class="header">
+        <%= stock.name %>
+
+      </div>
+      <div class="meta">
+        <%= stock.symbol %>
+      </div>
+      <div class="description">
+        <p>Sector: <%= stock.sector %></p>
+        <p> Market Cap: <%= stock.market_cap %></p>
+
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="ui two buttons">
+        <div class="ui basic green button">View details</div>
+        <div class="ui basic red button">Decline</div>
+      </div>
+    </div>
+  </div>
+      <% end %>
+</div>
+  </div>
+
+
+</div>
+
+
+

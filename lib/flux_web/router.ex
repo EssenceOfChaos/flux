@@ -21,6 +21,7 @@ defmodule FluxWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/exchange", Stocks.StocksLive
   end
 
   # Other scopes may use custom stacks.
