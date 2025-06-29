@@ -39,3 +39,4 @@ npm-debug.log
 logs/*
 .env
 .iex.exs
+*/.DS_Store

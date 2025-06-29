@@ -40,7 +40,9 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## Developing Flux
 
-## Forex Pairs:
+Run the tests with `mix test`
+
+### Forex Pairs:
 
 - usd / eur - euro
 - usd / jpy - japanese yen
