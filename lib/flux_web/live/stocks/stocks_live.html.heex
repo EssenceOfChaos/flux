@@ -20,18 +20,14 @@
 <br />
 
 <div class="ui grid">
-
   <div class="sixteen wide column">
   <div class="ui cards">
       <%= for stock <- @mock_stocks do %>
   <div class="card">
     <div class="content">
       <img class="right floated mini ui image"src={"/images/#{stock.image}"}>
-
-
       <div class="header">
         <%= stock.name %>
-
       </div>
       <div class="meta">
         <%= stock.symbol %>
@@ -39,9 +35,9 @@
       <div class="description">
         <p>Sector: <%= stock.sector %></p>
         <p> Market Cap: <%= stock.market_cap %></p>
-
       </div>
     </div>
+
     <div class="extra content">
       <div class="ui two buttons">
         <div class="ui basic green button">View details</div>
@@ -52,6 +48,33 @@
       <% end %>
 </div>
   </div>
+
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Sector</th>
+        <th>Market Cap</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= if assigns[:error_message] do %>
+        <tr>
+          <td colspan="6"><%= @error_message %></td>
+        </tr>
+      <% else %>
+        <%= for stock <- @stocks_csv do %>
+          <tr>
+            <td><%= stock.symbol %></td>
+            <td><%= stock.name %></td>
+            <td><%= stock.sector %></td>
+            <td>$ <%= stock.market_cap %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 
 
 </div>

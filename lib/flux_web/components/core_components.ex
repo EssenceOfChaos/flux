@@ -584,7 +584,6 @@ defmodule FluxWeb.CoreComponents do
   your compiled app.css by the plugin in your `assets/tailwind.config.js`.
 
   ## Examples
-
       <.icon name="hero-x-mark-solid" />
       <.icon name="hero-arrow-path" class="ml-1 w-3 h-3 animate-spin" />
   """

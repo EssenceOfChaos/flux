@@ -83,3 +83,35 @@ iex(1)> Flux.Exchange.Stock.get_quote("AAPL")
   change_percent: "2.2484%"
 }
 ```
+
+### Aggregates
+
+How many rows are in a table?
+
+```elixir
+iex(2)> Flux.Repo.aggregate(Flux.Research.Document, :count, :id)
+[debug] QUERY OK source="documents" db=2.3ms queue=2.0ms idle=1213.4ms
+SELECT count(d0."id") FROM "documents" AS d0 []
+↳ :elixir.eval_external_handler/3, at: src/elixir.erl:386
+2
+```
+
+Infinate Scroll
+
+<ul
+  id="docs"
+  phx-update="stream"
+  phx-viewport-top={@page > 1 && JS.push("prev-page", page_loading: true)}
+  phx-viewport-bottom={!@end_of_timeline? && JS.push("next-page", page_loading: true)}
+  class={[
+    if(@end_of_timeline?, do: "pb-10", else: "pb-[calc(200vh)]"),
+    if(@page == 1, do: "pt-10", else: "pt-[calc(200vh)]")
+  ]}
+>
+  <li :for={{id, doc} <- @streams.docs} id={id}>
+    <p class="doc-spacer"> </p>
+    <p><%= doc.name %></p>
+    <p><%= doc.content %></p>
+    <p class="doc-spacer"> </p>
+  </li>
+</ul>

@@ -1,12 +1,17 @@
 defmodule FluxWeb.Stocks.StocksLive do
   use FluxWeb, :live_view
   alias Flux.Exchange
-
   require Logger
-
+  # TODO: make sure open_stocks_csv() is called a single time then cached
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, query: "", results: %{}, mock_stocks: Exchange.mock_stocks())}
+    {:ok,
+     assign(socket,
+       query: "",
+       results: %{},
+       mock_stocks: Exchange.mock_stocks(),
+       stocks_csv: Exchange.open_stocks_csv()
+     )}
   end
 
   @impl true
@@ -18,15 +23,12 @@ defmodule FluxWeb.Stocks.StocksLive do
   def handle_event("search", %{"q" => query}, socket) do
     case validate_stock(query) do
       [{:ok, stock_name}] ->
-        # Watchlist.add_stock(:watchlist, stock_name)
-
         {:noreply,
          socket
          |> put_flash(:info, "Searching the company \"#{stock_name}\"!")
          |> assign(
            results: search(query),
            query: query
-           #  watchlist: Watchlist.get_state(:watchlist)
          )}
 
       _ ->

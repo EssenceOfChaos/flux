@@ -36,7 +36,7 @@ defmodule Flux.Exchange.Stock do
 
   @spec stocks_csv :: binary
   defp stocks_csv() do
-    Application.app_dir(:external, "/priv/static/assets/data/sp500_companies.csv")
+    Application.app_dir(:flux, "/priv/static/assets/data/sp500_companies.csv")
   end
 
   def get_quote(symbol) when is_binary(symbol) do

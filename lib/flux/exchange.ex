@@ -2,6 +2,11 @@ defmodule Flux.Exchange do
   @moduledoc """
   The Exchange Context
   """
+  alias Flux.Exchange.Stock
+
+  def open_stocks_csv() do
+    Stock.open_stocks()
+  end
 
   def mock_stocks() do
     [

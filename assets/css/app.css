@@ -1,17 +1,10 @@
+/**
+    Eventually remove tailwindcss from app
+*/
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "./flux.css";
+
 /* This file is for your main application CSS */
-.max-w-2xl {
-    max-width: 65rem !important
-}
-
-.homepage_grid {
-    margin-top: 2rem !important;
-}
-
-.ui.fluid.placeholder {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
