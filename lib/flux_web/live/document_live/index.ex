@@ -12,7 +12,7 @@ defmodule FluxWeb.DocumentLive.Index do
   def mount(_, _, socket) do
     {:ok,
      socket
-     |> assign(page: 1, per_page: 10)
+     |> assign(page: 1, per_page: 10, brightness: 0)
      |> paginate_posts(1)}
   end
 
@@ -54,8 +54,25 @@ defmodule FluxWeb.DocumentLive.Index do
 
   def handle_event("on", _, socket) do
     Logger.info("Handling on Event")
-    socket = assign(socket, :limit, 10)
+    :timer.sleep(2000)
+    socket = assign(socket, :brightness, 10)
     {:noreply, socket}
+  end
+
+  def handle_event("next-page", _, socket) do
+    {:noreply, paginate_posts(socket, socket.assigns.page + 1)}
+  end
+
+  def handle_event("prev-page", %{"_overran" => true}, socket) do
+    {:noreply, paginate_posts(socket, 1)}
+  end
+
+  def handle_event("prev-page", _, socket) do
+    if socket.assigns.page > 1 do
+      {:noreply, paginate_posts(socket, socket.assigns.page - 1)}
+    else
+      {:noreply, socket}
+    end
   end
 
   defp paginate_posts(socket, new_page) when new_page >= 1 do
@@ -82,22 +99,6 @@ defmodule FluxWeb.DocumentLive.Index do
         |> assign(end_of_timeline?: false)
         |> assign(:page, new_page)
         |> stream(:documents, docs, at: at, limit: limit)
-    end
-  end
-
-  def handle_event("next-page", _, socket) do
-    {:noreply, paginate_posts(socket, socket.assigns.page + 1)}
-  end
-
-  def handle_event("prev-page", %{"_overran" => true}, socket) do
-    {:noreply, paginate_posts(socket, 1)}
-  end
-
-  def handle_event("prev-page", _, socket) do
-    if socket.assigns.page > 1 do
-      {:noreply, paginate_posts(socket, socket.assigns.page - 1)}
-    else
-      {:noreply, socket}
     end
   end
 end
